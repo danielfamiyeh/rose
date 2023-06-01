@@ -1,1 +1,0 @@
-# Rosalind Challenge Submissions
