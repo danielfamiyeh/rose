@@ -1,2 +1,2 @@
-export { Sequence } from './Sequence';
-export { DNA } from './DNA';
+export { Seq } from './Seq';
+export { DNASeq } from './DNASeq';
