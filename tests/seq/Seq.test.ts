@@ -1,4 +1,5 @@
 import { assert } from 'chai';
+
 import { Seq } from '../../src/seq/Seq';
 
 describe('Seq test suite', () => {
