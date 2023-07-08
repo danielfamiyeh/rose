@@ -1,12 +1,12 @@
 import { assert } from 'chai';
-import { Sequence } from '../../src/seq/Sequence';
+import { Seq } from '../../src/seq/Seq';
 
-describe('Sequence test suite', () => {
-  it('should create a new Sequence', () => {
+describe('Seq test suite', () => {
+  it('should create a new Seq', () => {
     const data = 'ATCG';
     const type = 'dna';
 
-    const seq = new Sequence(data, type);
+    const seq = new Seq(data, type);
 
     assert.equal(seq.data, data);
     assert.equal(seq.type, type);
