@@ -10,10 +10,16 @@ export class Sequence {
 
   constructor(protected _data: string, protected _type: SequenceType) {}
 
+  /**
+   * Returns sequence data
+   */
   get data() {
     return this._data;
   }
 
+  /**
+   * Returns sequence type
+   */
   get type() {
     return this._type;
   }
