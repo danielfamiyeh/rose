@@ -2,7 +2,7 @@ import { assert } from 'chai';
 import { Sequence } from '../../src/seq/Sequence';
 
 describe('Sequence test suite', () => {
-  it('Should create a new Sequence', () => {
+  it('should create a new Sequence', () => {
     const data = 'ATCG';
     const type = 'dna';
 
