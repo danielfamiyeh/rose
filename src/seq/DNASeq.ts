@@ -16,10 +16,31 @@ export class DNASeq extends NucleicAcidSeq {
    * Returns array of nucleotide counts in the order A C G T
    */
   get nucleoCount() {
-    return this.getNucleoCount(this._bases)
+    return this.getNucleoCount(this._bases);
   }
 
-  get asRNA(){
+  get revComp() {
+    return new DNASeq(
+      this._data
+        .split('')
+        .reverse()
+        .map((base) => {
+          switch (base) {
+            case 'A':
+              return 'T';
+            case 'T':
+              return 'A';
+            case 'C':
+              return 'G';
+            case 'G':
+              return 'C';
+          }
+        })
+        .join('')
+    );
+  }
+
+  get asRNA() {
     return new RNASeq(this._data.replace(/T/g, 'U'));
   }
 }
