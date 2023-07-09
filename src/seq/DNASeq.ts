@@ -2,7 +2,7 @@ import { NucleicAcidSeq } from './NucleicAcidSeq';
 import { RNASeq } from './RNASeq';
 
 export class DNASeq extends NucleicAcidSeq {
-  private readonly _alphabet = ['A', 'C', 'G', 'T'];
+  private static readonly _alphabet = ['A', 'C', 'G', 'T'];
 
   /**
    * Creates a new DNA object
@@ -16,7 +16,7 @@ export class DNASeq extends NucleicAcidSeq {
    * Returns array of nucleotide counts in the order A C G T
    */
   get nucleoCount() {
-    return this.getNucleoCount(this._alphabet);
+    return this.getNucleoCount(DNASeq._alphabet);
   }
 
   get revComp() {
@@ -42,7 +42,7 @@ export class DNASeq extends NucleicAcidSeq {
   }
 
   get asRNA() {
-    // TODO: Not sure about passing meta here
+    // TODO: Not sure about passing meta here since it's technically different sequence altogether
     return new RNASeq(this._data.replace(/T/g, 'U'), this._meta);
   }
 
