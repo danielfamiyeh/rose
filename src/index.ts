@@ -1,9 +1,9 @@
 import path from 'path';
 
-import { FastaFileIO } from './file/FastaFileIO';
+import { FastaFile } from './file/FastaFile';
 
 export * as Seq from './seq';
 
-FastaFileIO.read(path.join(__dirname, 'asdf.txt')).then((data) =>
+FastaFile.read(path.join(__dirname, 'asdf.txt')).then((data) =>
   console.log(data)
 );
