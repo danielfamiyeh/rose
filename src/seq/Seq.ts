@@ -8,7 +8,10 @@ export class Seq {
    * @param {SeqType} _type Seq type
    */
 
-  constructor(protected _data: string, protected _type: SeqType) {}
+  constructor(
+    protected readonly _data: string,
+    protected readonly _type: SeqType
+  ) {}
 
   /**
    * Returns sequence data
