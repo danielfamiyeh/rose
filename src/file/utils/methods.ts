@@ -14,17 +14,13 @@ export const readFileAsync = async (
   options: ReadFileAsyncOptions
 ) => {
   const _options = Object.assign({}, { ...READ_FILE_DEFAULTS }, options);
-
   const rl = readline.createInterface({
     input: fs.createReadStream(path),
     crlfDelay: Infinity,
   });
-
   let lineNum = 0;
-
   rl.on('line', (text) => {
     _options.onReadLine(lineNum, text);
-
     if (!(lineNum % 100)) {
       Logger.info(
         `Reading line: ${lineNum + 1}. Memory used: ${
@@ -32,9 +28,7 @@ export const readFileAsync = async (
         } MB`
       );
     }
-
     lineNum++;
   });
-
   await events.once(rl, 'close');
 };
