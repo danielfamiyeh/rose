@@ -1,3 +1,5 @@
+import { DNASeq, RNASeq } from '../seq';
+import { Seq, SeqType } from '../seq/Seq';
 import { trycatchAsync } from '../utils/trycatch';
 import { readFileAsync } from './utils/methods';
 
@@ -7,36 +9,42 @@ export type FastaFileMeta = {
 };
 
 export class FastaFile {
-  constructor(
-    private readonly _data: string,
-    private readonly _meta: FastaFileMeta
-  ) {}
-
-  static async read(path: string): Promise<FastaFile> {
-    let data = '';
-    let meta = { seqId: '', rest: '' };
+  static async read(path: string, seqType: SeqType): Promise<Seq[]> {
+    let seqIdx = -1;
+    let sequences = [];
 
     await trycatchAsync(() =>
       readFileAsync(path, {
-        onReadLine: (lineNum: number, text: string) => {
-          if (lineNum) {
-            data += text;
+        onReadLine: (text: string) => {
+          if (!text.startsWith('>')) {
+            sequences[seqIdx].append(text);
           } else {
-            const [seqId, rest] = text.split('|').map((datum) => datum.trim());
-            meta = { seqId: seqId ?? 'IDENTIFIER', rest: rest ?? '' };
+            const [seqId, rest] = text
+              .split('|')
+              .map((datum, i) => (i ? datum.trim() : datum.trim().slice(1)));
+
+            const meta = {
+              seqId: seqId ?? 'MISSING_IDENTIFIER',
+              rest: rest ?? '',
+            };
+
+            seqIdx++;
+
+            sequences[seqIdx] = (() => {
+              switch (seqType) {
+                case 'dna': {
+                  return new DNASeq('', meta);
+                }
+                case 'rna': {
+                  return new RNASeq('', meta);
+                }
+              }
+            })();
           }
         },
       })
     );
 
-    return new FastaFile(data, meta);
-  }
-
-  get data() {
-    return this._data;
-  }
-
-  get meta() {
-    return this._meta;
+    return sequences;
   }
 }

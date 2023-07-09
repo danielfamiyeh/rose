@@ -7,8 +7,8 @@ export class RNASeq extends NucleicAcidSeq {
    * Creates a new RNA object
    * @param {string} data RNA sequence string
    */
-  constructor(data: string) {
-    super(data.toLocaleUpperCase(), 'rna');
+  constructor(data: string, meta?: any) {
+    super(data.toLocaleUpperCase(), 'rna', meta);
   }
 
   /**

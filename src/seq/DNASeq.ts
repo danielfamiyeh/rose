@@ -8,8 +8,8 @@ export class DNASeq extends NucleicAcidSeq {
    * Creates a new DNA object
    * @param {string} data DNA sequence string
    */
-  constructor(data: string) {
-    super(data.toLocaleUpperCase(), 'dna');
+  constructor(data: string, meta?: any) {
+    super(data.toLocaleUpperCase(), 'dna', meta);
   }
 
   /**
@@ -36,13 +36,24 @@ export class DNASeq extends NucleicAcidSeq {
               return 'C';
           }
         })
-        .join('')
+        .join(''),
+      this._meta
     );
   }
 
   get asRNA() {
-    return new RNASeq(this._data.replace(/T/g, 'U'));
+    // TODO: Not sure about passing meta here
+    return new RNASeq(this._data.replace(/T/g, 'U'), this._meta);
   }
 
-  // get gcContent() {}
+  get gcContent() {
+    const bases = ['G', 'C'];
+    const gcOccurence = [
+      ...bases
+        .map((base) => base)
+        .flatMap((base) => this.data.match(new RegExp(base, 'g')) || []),
+    ].length;
+
+    return (gcOccurence / this.data.length) * 100;
+  }
 }
