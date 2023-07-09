@@ -1,7 +1,7 @@
 import { NucleicAcidSeq } from './NucleicAcidSeq';
 
 export class RNASeq extends NucleicAcidSeq {
-  private _bases = ['A', 'C', 'G', 'U'];
+  private readonly _alphabet = ['A', 'C', 'G', 'U'];
 
   /**
    * Creates a new RNA object
@@ -15,6 +15,6 @@ export class RNASeq extends NucleicAcidSeq {
    * Returns array of nucleotide counts in the order A C G U
    */
   get nucleoCount() {
-    return this.getNucleoCount(this._bases);
+    return this.getNucleoCount(this._alphabet);
   }
 }

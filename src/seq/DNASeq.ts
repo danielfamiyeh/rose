@@ -2,7 +2,7 @@ import { NucleicAcidSeq } from './NucleicAcidSeq';
 import { RNASeq } from './RNASeq';
 
 export class DNASeq extends NucleicAcidSeq {
-  private _bases = ['A', 'C', 'G', 'T'];
+  private readonly _alphabet = ['A', 'C', 'G', 'T'];
 
   /**
    * Creates a new DNA object
@@ -16,7 +16,7 @@ export class DNASeq extends NucleicAcidSeq {
    * Returns array of nucleotide counts in the order A C G T
    */
   get nucleoCount() {
-    return this.getNucleoCount(this._bases);
+    return this.getNucleoCount(this._alphabet);
   }
 
   get revComp() {
@@ -43,4 +43,6 @@ export class DNASeq extends NucleicAcidSeq {
   get asRNA() {
     return new RNASeq(this._data.replace(/T/g, 'U'));
   }
+
+  // get gcContent() {}
 }
