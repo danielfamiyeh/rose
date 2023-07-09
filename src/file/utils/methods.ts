@@ -5,10 +5,24 @@ import readline from 'readline';
 import { Logger } from '../../utils/logger';
 import { READ_FILE_DEFAULTS } from './constants';
 
+/** Options for the readFileAsync() method */
 type ReadFileAsyncOptions = {
+  /**
+   * Function executed every time line is read from file
+   *
+   * @param {string} text     Text from line
+   * @param {number} lineNum  Current line number
+   * @returns {void}
+   */
   onReadLine: (text: string, lineNum?: number) => void;
 };
 
+/**
+ * Reads file asynchronously
+ *
+ * @param {string} path                   Absolute path to file
+ * @param {ReadFileAsyncOptions} options  Options
+ */
 export const readFileAsync = async (
   path: string,
   options: ReadFileAsyncOptions
