@@ -6,7 +6,7 @@ import { Logger } from '../../utils/logger';
 import { READ_FILE_DEFAULTS } from './constants';
 
 type ReadFileAsyncOptions = {
-  onReadLine: (lineNum: number, text: string) => void;
+  onReadLine: (text: string, lineNum?: number) => void;
 };
 
 export const readFileAsync = async (
@@ -20,7 +20,7 @@ export const readFileAsync = async (
   });
   let lineNum = 0;
   rl.on('line', (text) => {
-    _options.onReadLine(lineNum, text);
+    _options.onReadLine(text, lineNum);
     if (!(lineNum % 100)) {
       Logger.info(
         `Reading line: ${lineNum + 1}. Memory used: ${

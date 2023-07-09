@@ -1,8 +1,8 @@
 import { Seq, SeqType } from './Seq';
 
 export class NucleicAcidSeq extends Seq {
-  constructor(data: string, type: SeqType) {
-    super(data, type);
+  constructor(data: string, type: SeqType, meta?: any) {
+    super(data, type, meta);
   }
 
   toString() {

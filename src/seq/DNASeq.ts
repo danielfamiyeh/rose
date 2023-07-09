@@ -2,21 +2,21 @@ import { NucleicAcidSeq } from './NucleicAcidSeq';
 import { RNASeq } from './RNASeq';
 
 export class DNASeq extends NucleicAcidSeq {
-  private readonly _alphabet = ['A', 'C', 'G', 'T'];
+  private static readonly _alphabet = ['A', 'C', 'G', 'T'];
 
   /**
    * Creates a new DNA object
    * @param {string} data DNA sequence string
    */
-  constructor(data: string) {
-    super(data.toLocaleUpperCase(), 'dna');
+  constructor(data: string, meta?: any) {
+    super(data.toLocaleUpperCase(), 'dna', meta);
   }
 
   /**
    * Returns array of nucleotide counts in the order A C G T
    */
   get nucleoCount() {
-    return this.getNucleoCount(this._alphabet);
+    return this.getNucleoCount(DNASeq._alphabet);
   }
 
   get revComp() {
@@ -36,13 +36,24 @@ export class DNASeq extends NucleicAcidSeq {
               return 'C';
           }
         })
-        .join('')
+        .join(''),
+      this._meta
     );
   }
 
   get asRNA() {
-    return new RNASeq(this._data.replace(/T/g, 'U'));
+    // TODO: Not sure about passing meta here since it's technically different sequence altogether
+    return new RNASeq(this._data.replace(/T/g, 'U'), this._meta);
   }
 
-  // get gcContent() {}
+  get gcContent() {
+    const bases = ['G', 'C'];
+    const gcOccurence = [
+      ...bases
+        .map((base) => base)
+        .flatMap((base) => this.data.match(new RegExp(base, 'g')) || []),
+    ].length;
+
+    return (gcOccurence / this.data.length) * 100;
+  }
 }

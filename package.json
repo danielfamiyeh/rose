@@ -1,6 +1,6 @@
 {
-  "name": "rose-lib",
-  "version": "1.0.0",
+  "name": "rose",
+  "version": "0.0.1",
   "description": "",
   "main": "index.js",
   "types": "lib",
@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/danielfamiyeh/rose.git"
   },
   "author": "Daniel Famiyeh",
   "license": "MIT",

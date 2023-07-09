@@ -9,9 +9,14 @@ export class Seq {
    */
 
   constructor(
-    protected readonly _data: string,
-    protected readonly _type: SeqType
+    protected _data: string,
+    protected readonly _type: SeqType,
+    protected readonly _meta: any = {}
   ) {}
+
+  append(str: string) {
+    this._data += str;
+  }
 
   /**
    * Returns sequence data
@@ -25,5 +30,9 @@ export class Seq {
    */
   get type() {
     return this._type;
+  }
+
+  get meta() {
+    return this._meta;
   }
 }

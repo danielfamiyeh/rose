@@ -1,9 +1,7 @@
 import path from 'path';
 
-import { FastaFile } from './file/FastaFile';
-import { DNASeq } from './seq';
-
-export * as Seq from './seq';
+import { DNASeq } from '../../../src/seq';
+import { FastaFile } from '../../../src/file/FastaFile';
 
 FastaFile.read(path.join(__dirname, 'dataset.txt'), 'dna').then((data) => {
   const gcContents = data.map((seq) => (<DNASeq>seq).gcContent);
